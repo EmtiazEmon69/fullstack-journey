@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Emtiaz | Full-Stack Journey</title>
+  <link rel="stylesheet" href="style.css" />
+  <meta name="description" content="Portfolio mini site for Emtiaz Ahamed — Bachelor of IT, learning Full Stack with Python backend." />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Header / Nav -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <span class="logo">EA</span>
+        <div>
+          <h1>Emtiaz Ahamed</h1>
+          <p class="subtitle">Bachelor of IT • Full Stack (Python) Journey</p>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#contact" class="nav-link">Contact</a>
+        <button id="themeToggle" class="btn ghost" aria-label="Toggle dark mode">🌗</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="container site-main">
+    <!-- About -->
+    <section id="about" class="section">
+      <h2 class="section-title">About</h2>
+      <p class="lead">
+        I’m building real, useful apps while specialising in
+        <strong>Full Stack development with a Python backend</strong>. This site tracks my progress and showcases
+        projects I’m proud of. 🚀
+      </p>
+
+      <div class="quick-actions">
+        <a href="#" class="btn primary" aria-disabled="true" title="Coming soon">Download Résumé</a>
+        <a href="https://github.com/EmtiazEmon69" target="_blank" rel="noopener" class="btn">GitHub Profile</a>
+        <a href="#projects" class="btn">See Projects</a>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="section">
+      <h2 class="section-title">Projects</h2>
+
+      <ul class="cards" role="list">
+        <li class="card">
+          <div class="card-head">
+            <h3>LifeHub</h3>
+            <span class="badge">Flask</span>
+          </div>
+          <p>Expense + diary + weather app. Focus on CRUD, auth, and charts.</p>
+          <div class="tags">
+            <span>#Flask</span><span>#SQLite</span><span>#Chart.js</span>
+          </div>
+          <div class="card-actions">
+            <a class="btn small" href="#" aria-disabled="true" title="Repo coming soon">Repo</a>
+            <a class="btn small ghost" href="#" aria-disabled="true" title="Demo coming soon">Live</a>
+          </div>
+        </li>
+
+        <li class="card">
+          <div class="card-head">
+            <h3>SmartFlicks</h3>
+            <span class="badge">ML</span>
+          </div>
+          <p>Movie recommendation system with basic ML + web UI.</p>
+          <div class="tags">
+            <span>#Scikit-learn</span><span>#Pandas</span><span>#Flask</span>
+          </div>
+          <div class="card-actions">
+            <a class="btn small" href="#" aria-disabled="true">Repo</a>
+            <a class="btn small ghost" href="#" aria-disabled="true">Live</a>
+          </div>
+        </li>
+
+        <li class="card">
+          <div class="card-head">
+            <h3>Cinema Booking</h3>
+            <span class="badge">Web</span>
+          </div>
+          <p>Simple booking system with routes, forms, validation.</p>
+          <div class="tags">
+            <span>#Flask</span><span>#Forms</span><span>#Bootstrap</span>
+          </div>
+          <div class="card-actions">
+            <a class="btn small" href="#" aria-disabled="true">Repo</a>
+            <a class="btn small ghost" href="#" aria-disabled="true">Live</a>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section">
+      <h2 class="section-title">Contact</h2>
+      <div class="contact-card">
+        <p>Email: <a id="emailLink" href="mailto:emtiaz576@gmail.com">emtiaz576@gmail.com</a></p>
+        <div class="contact-actions">
+          <button id="copyEmail" class="btn small">Copy email</button>
+          <a class="btn small ghost" href="https://www.linkedin.com/in/emtiaz-ahamed-emon-b53242255/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn small" href="https://github.com/EmtiazEmon69" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <small>Prefer messages about internships, junior roles, or small freelance builds.</small>
+      </div>
+    </section>
+  </main>
+
+  <button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>© <span id="year"></span> Emtiaz Ahamed • Built with love and vanilla HTML/CSS/JS</small>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Guard helpers
+      const $ = (sel) => document.querySelector(sel);
+    
+      // Year
+      const yearEl = $('#year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+    
+      // Dark mode toggle (persisted)
+      const root = document.documentElement;
+      const themeToggle = $('#themeToggle');
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) root.dataset.theme = savedTheme;
+    
+      if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+          const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+          root.dataset.theme = next;
+          localStorage.setItem('theme', next);
+          themeToggle.setAttribute('aria-pressed', next === 'dark');
+        });
+      }
+    
+      // Active nav link on scroll (IntersectionObserver)
+      const links = document.querySelectorAll('.nav-link');
+      const sections = Array.from(document.querySelectorAll('main .section'))
+        .filter(s => s.id); // only with ids
+    
+      if ('IntersectionObserver' in window && sections.length) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            links.forEach((a) => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+          });
+        }, { rootMargin: '-50% 0px -45% 0px', threshold: 0 });
+        sections.forEach((s) => io.observe(s));
+      } else {
+        // Fallback: highlight based on scroll position
+        window.addEventListener('scroll', () => {
+          const y = window.scrollY + window.innerHeight * 0.5;
+          let currentId = sections[0]?.id;
+          sections.forEach(s => {
+            const rect = s.getBoundingClientRect();
+            const top = rect.top + window.scrollY;
+            if (y >= top) currentId = s.id;
+          });
+          links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + currentId));
+        });
+      }
+    
+      // Copy email button
+      const copyBtn = $('#copyEmail');
+      const emailEl = $('#emailLink');
+      if (copyBtn && emailEl) {
+        copyBtn.addEventListener('click', async () => {
+          const email = emailEl.textContent.trim();
+          try {
+            await navigator.clipboard.writeText(email);
+            const prev = copyBtn.textContent;
+            copyBtn.textContent = 'Copied!';
+            setTimeout(() => (copyBtn.textContent = prev), 1200);
+          } catch (err) {
+            // Fallback prompt if clipboard fails
+            window.prompt('Copy email address:', email);
+          }
+        });
+      }
+    
+      // Back-to-top appearance & action
+      const btt = $('#backToTop');
+      if (btt) {
+        const showAt = 300; // lowered threshold so it appears sooner
+        window.addEventListener('scroll', () => {
+          btt.classList.toggle('show', window.scrollY > showAt);
+        });
+        btt.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    });
+    </script>
+    
+</body>
+</html>
