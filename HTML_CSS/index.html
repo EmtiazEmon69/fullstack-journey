@@ -1,11 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Emtiaz | Full-Stack Journey</title>
   <link rel="stylesheet" href="style.css" />
-  <meta name="description" content="Portfolio site for Emtiaz Ahamed — Bachelor of IT, specialising in Full Stack (Python backend).">
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="alternate icon" href="favicon.svg" />
+
+<!-- Primary Meta -->
+<meta name="title" content="Emtiaz Ahamed — Full Stack (Python) Portfolio" />
+<meta name="description" content="Bachelor of IT student building Full Stack (Python) projects. Open to internships and junior roles." />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Emtiaz Ahamed — Full Stack (Python) Portfolio" />
+<meta property="og:description" content="Projects, skills, and experience. Open to internships and junior roles." />
+<meta property="og:image" content="assets/og-image.png" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Emtiaz Ahamed — Full Stack (Python) Portfolio" />
+<meta name="twitter:description" content="Projects, skills, and experience. Open to internships and junior roles." />
+<meta name="twitter:image" content="assets/og-image.png" />
+
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -175,41 +190,8 @@
     </div>
   </footer>
 
-  <!-- Minimal JS -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Year
-      document.getElementById('year').textContent = new Date().getFullYear();
+<script src="main.js"></script>
 
-      // Mobile menu
-      const btn = document.getElementById('menuToggle');
-      const nav = document.getElementById('mainNav');
-      btn.addEventListener('click', () => {
-        const open = nav.classList.toggle('open');
-        btn.setAttribute('aria-expanded', String(open));
-      });
-      nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-        nav.classList.remove('open'); btn.setAttribute('aria-expanded', 'false');
-      }));
-      window.addEventListener('resize', () => { if (window.innerWidth > 720) nav.classList.remove('open'); });
-
-      // Copy email
-      const copyBtn = document.getElementById('copyEmail');
-      copyBtn.addEventListener('click', async () => {
-        const email = document.getElementById('emailLink').textContent.trim();
-        try {
-          await navigator.clipboard.writeText(email);
-          const prev = copyBtn.textContent;
-          copyBtn.textContent = 'Copied!';
-          setTimeout(() => (copyBtn.textContent = prev), 1100);
-        } catch { window.prompt('Copy email address:', email); }
-      });
-
-      // Back to top
-      const btt = document.getElementById('backToTop');
-      window.addEventListener('scroll', () => btt.classList.toggle('show', window.scrollY > 300));
-      btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-    });
-  </script>
+  
 </body>
 </html>
